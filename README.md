@@ -7,13 +7,13 @@ Goes beyond `npkill` — detects `node_modules`, `.next`, `.expo`, `.gradle`, `D
 ## Install
 
 ```bash
-npm install -g devclean
+npm install -g @sanchit.kumar/devclean
 ```
 
 Or run without installing:
 
 ```bash
-npx devclean
+npx @sanchit.kumar/devclean
 ```
 
 ## Quick Start

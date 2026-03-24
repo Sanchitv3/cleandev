@@ -1,5 +1,5 @@
 {
-  "name": "@sanchitkumar/devclean",
+  "name": "@sanchit.kumar/devclean",
   "version": "1.0.0",
   "description": "Next-gen disk cleanup tool for developers — reclaim tens of GBs by intelligently cleaning node_modules, .next, .expo, build artifacts and more.",
   "type": "module",
