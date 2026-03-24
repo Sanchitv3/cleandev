@@ -64,78 +64,28 @@ export async function selectItems(results, opts = {}) {
   // Print keyboard shortcuts
   printKeyboardShortcuts();
 
-  // Double-ESC exit handler — uses raw stdin to avoid lag
-  const escResult = await new Promise((resolve) => {
-    let lastEscTime = 0;
-    const ESC_TIMEOUT = 800;
-    let resolved = false;
-
-    function onData(data) {
-      // ESC is byte 27
-      if (data[0] === 27 && !resolved) {
-        const now = Date.now();
-        if (now - lastEscTime < ESC_TIMEOUT) {
-          resolved = true;
-          cleanup();
-          resolve('EXIT');
-          return;
-        }
-        lastEscTime = now;
-      }
-    }
-
-    function cleanup() {
-      if (process.stdin.isTTY) {
-        process.stdin.removeListener('data', onData);
-        try { process.stdin.setRawMode(false); } catch {}
-      }
-    }
-
-    if (process.stdin.isTTY) {
-      try { process.stdin.setRawMode(true); } catch {}
-      process.stdin.on('data', onData);
-    }
-
-    // Ctrl+C
-    const sigintHandler = () => {
-      if (!resolved) {
-        resolved = true;
-        cleanup();
-        resolve('EXIT');
-      }
-    };
-    process.once('SIGINT', sigintHandler);
-
-    // Run inquirer prompt
-    inquirer
-      .prompt([
-        {
-          type: 'checkbox',
-          name: 'selected',
-          message: chalk.bold('  Select folders to clean:'),
-          choices,
-          pageSize: Math.min(cleanable.length + 2, 20),
-          loop: false,
-          validate: () => true,
-        },
-      ])
-      .then(({ selected }) => {
-        cleanup();
-        process.removeListener('SIGINT', sigintHandler);
-        if (!resolved) resolve(selected);
-      })
-      .catch(() => {
-        cleanup();
-        if (!resolved) resolve('EXIT');
-      });
-  });
-
-  if (escResult === 'EXIT') {
+  // Interactive prompt — let inquirer handle stdin entirely
+  let selected;
+  try {
+    const result = await inquirer.prompt([
+      {
+        type: 'checkbox',
+        name: 'selected',
+        message: chalk.bold('  Select folders to clean:'),
+        choices,
+        pageSize: Math.min(cleanable.length + 2, 20),
+        loop: false,
+        validate: () => true,
+      },
+    ]);
+    selected = result.selected;
+  } catch {
+    // Ctrl+C or prompt error
     console.log(chalk.dim('\n\n  Exiting. Nothing was deleted.\n'));
     process.exit(0);
   }
 
-  return escResult.map((i) => results[i]);
+  return selected.map((i) => results[i]);
 }
 
 /**
@@ -210,7 +160,7 @@ function buildChoices(results, cleanable, dangerous, preSelectedValues, force = 
   choices.push(new inquirer.Separator(chalk.dim('  ' + '─'.repeat(70))));
   choices.push(
     new inquirer.Separator(
-      chalk.dim(`  ${cleanable.length} items available  |  ${preSelectedValues.size} pre-selected  |  ESC×2 to exit`)
+      chalk.dim(`  ${cleanable.length} items available  |  ${preSelectedValues.size} pre-selected  |  Ctrl+C to exit`)
     )
   );
 
@@ -319,10 +269,10 @@ function printSelectionHeader(safe, review, dangerous, force = false) {
  */
 function printKeyboardShortcuts() {
   const shortcuts = [
-    ['Space', 'Toggle selection'],
+    ['Space', 'Toggle'],
     ['a', 'Select all'],
-    ['i', 'Invert selection'],
-    ['ESC', 'Exit'],
+    ['i', 'Invert'],
+    ['Ctrl+C', 'Exit'],
     ['Enter', 'Confirm'],
   ];
 

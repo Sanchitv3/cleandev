@@ -1,6 +1,6 @@
 {
   "name": "cleandev",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Next-gen disk cleanup tool for developers — reclaim tens of GBs by intelligently cleaning node_modules, .next, .expo, build artifacts and more.",
   "type": "module",
   "bin": {
