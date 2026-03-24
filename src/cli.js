@@ -13,6 +13,12 @@ import { selectItems, confirmDeletion } from './ui/interactive.js';
 const pkg = { version: '1.0.0' };
 const DEFAULT_PATH = homedir();
 
+function parseDepth(value) {
+  if (value === 'true' || value === true) return true;
+  const n = parseInt(value);
+  return isNaN(n) ? 10 : n;
+}
+
 function parseList(value) {
   if (!value) return null;
   if (Array.isArray(value)) return value.length > 0 ? value : null;
@@ -31,7 +37,7 @@ program
   .command('clean', { isDefault: true })
   .description('Scan and interactively clean development artifacts')
   .option('-p, --path <path>', 'Path to scan', DEFAULT_PATH)
-  .option('-d, --depth <number>', 'Max scan depth', '5')
+  .option('-d, --depth <number>', 'Max scan depth (default: 10)', '10')
   .option('-a, --auto', 'Auto-delete safe folders (no confirmation)')
   .option('-t, --types <types>', 'Comma-separated folder types to scan')
   .option('-i, --ignore <patterns>', 'Comma-separated patterns to ignore')
@@ -50,7 +56,7 @@ program
   .command('scan')
   .description('Scan for cleanable folders (dry run)')
   .option('-p, --path <path>', 'Path to scan', DEFAULT_PATH)
-  .option('-d, --depth <number>', 'Max scan depth', '5')
+  .option('-d, --depth <number>', 'Max scan depth (default: 10)', '10')
   .option('-t, --types <types>', 'Comma-separated folder types to scan')
   .option('-i, --ignore <patterns>', 'Comma-separated patterns to ignore')
   .option('--min-size <bytes>', 'Minimum folder size in bytes', '0')
@@ -86,7 +92,7 @@ async function runClean(cliOptions) {
   try {
     results = await scan({
       path: options.path,
-      depth: parseInt(options.depth),
+      depth: parseDepth(options.depth),
       types: parseList(options.types),
       ignore: parseList(options.ignore),
       minSize: parseInt(options.minSize),
@@ -187,7 +193,7 @@ async function runScan(cliOptions) {
   try {
     results = await scan({
       path: options.path,
-      depth: parseInt(options.depth),
+      depth: parseDepth(options.depth),
       types: parseList(options.types),
       ignore: parseList(options.ignore),
       minSize: parseInt(options.minSize),

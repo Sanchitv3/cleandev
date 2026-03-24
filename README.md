@@ -73,7 +73,7 @@ cleandev clean --force            # Even protected folders become selectable
 | Flag | Description | Default |
 |------|-------------|---------|
 | `-p, --path <path>` | Root path to scan | `~/` (home dir) |
-| `-d, --depth <number>` | Max directory depth | `5` |
+| `-d, --depth <number>` | Max directory depth | `10` |
 | `-a, --auto` | Auto-delete safe folders | `false` |
 | `-t, --types <types>` | Comma-separated folder types | all |
 | `-i, --ignore <patterns>` | Comma-separated ignore patterns | — |
