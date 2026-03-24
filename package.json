@@ -1,0 +1,60 @@
+{
+  "name": "devclean",
+  "version": "1.0.0",
+  "description": "Next-gen disk cleanup tool for developers — reclaim tens of GBs by intelligently cleaning node_modules, .next, .expo, build artifacts and more.",
+  "type": "module",
+  "bin": {
+    "devclean": "./bin/devclean.js"
+  },
+  "main": "./src/index.js",
+  "exports": {
+    ".": "./src/index.js"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "files": [
+    "bin/",
+    "src/",
+    "README.md"
+  ],
+  "scripts": {
+    "start": "node bin/devclean.js",
+    "test": "node --test src/**/*.test.js"
+  },
+  "keywords": [
+    "devclean",
+    "disk cleanup",
+    "node_modules",
+    "cleanup",
+    "developer tools",
+    "disk space",
+    "npkill",
+    "clean",
+    "cli",
+    "react",
+    "nextjs",
+    "expo",
+    "monorepo",
+    "build artifacts",
+    "deriveddata",
+    "gradle"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "commander": "^12.0.0",
+    "fast-glob": "^3.3.2",
+    "inquirer": "^9.2.12",
+    "ora": "^8.0.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/devclean.git"
+  },
+  "author": "",
+  "funding": {
+    "type": "github",
+    "url": "https://github.com/sponsors/yourusername"
+  }
+}
