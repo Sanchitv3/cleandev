@@ -1,4 +1,4 @@
-# 🧹 devclean
+# 🧹 cleandev
 
 **Next-gen disk cleanup tool for developers.** Reclaim tens of GBs by intelligently detecting and cleaning unnecessary development artifacts.
 
@@ -7,65 +7,65 @@ Goes beyond `npkill` — detects `node_modules`, `.next`, `.expo`, `.gradle`, `D
 ## Install
 
 ```bash
-npm install -g @sanchit.kumar/devclean
+npm install -g cleandev
 ```
 
 Or run without installing:
 
 ```bash
-npx @sanchit.kumar/devclean
+npx cleandev
 ```
 
 ## Quick Start
 
 ```bash
 # Scan your entire home directory — find and clean dev artifacts anywhere
-devclean
+cleandev
 
 # Scan a specific path
-devclean --path ~/projects
+cleandev --path ~/projects
 
 # Scan only (dry run — nothing deleted)
-devclean scan
+cleandev scan
 
 # Auto-delete safe folders (unused 30+ days)
-devclean clean --auto
+cleandev clean --auto
 
 # Force mode — even protected folders become selectable
-devclean --force
+cleandev --force
 ```
 
 ## Commands
 
-### `devclean` (default — interactive)
+### `cleandev` (default — interactive)
 
 Scans the current directory, shows results, and lets you select folders to delete.
 
 ```bash
-devclean                    # Interactive cleanup in current directory
-devclean --path ~/projects  # Scan a different path
+cleandev                    # Interactive cleanup in current directory
+cleandev --path ~/projects  # Scan a different path
 ```
 
-### `devclean scan` (dry run)
+### `cleandev scan` (dry run)
 
 Only shows what's found — never deletes anything.
 
 ```bash
-devclean scan                         # Scan home directory
-devclean scan --path ~/projects       # Scan a specific path
-devclean scan --json                  # JSON output (pipe to jq, scripts, etc.)
-devclean scan --min-size 1048576      # Only show folders > 1 MB
-devclean scan --types node_modules,.next  # Only scan specific types
-devclean scan --force                 # Show protected folders as selectable
+cleandev scan                         # Scan home directory
+cleandev scan --path ~/projects       # Scan a specific path
+cleandev scan --json                  # JSON output (pipe to jq, scripts, etc.)
+cleandev scan --min-size 1048576      # Only show folders > 1 MB
+cleandev scan --types node_modules,.next  # Only scan specific types
+cleandev scan --force                 # Show protected folders as selectable
 ```
 
-### `devclean clean` (with options)
+### `cleandev clean` (with options)
 
 ```bash
-devclean clean --auto             # Auto-delete safe items (no prompt)
-devclean clean --auto --dry-run   # Show what auto-delete would remove
-devclean clean --safe-days 14     # Items unused 14+ days = safe
-devclean clean --force            # Even protected folders become selectable
+cleandev clean --auto             # Auto-delete safe items (no prompt)
+cleandev clean --auto --dry-run   # Show what auto-delete would remove
+cleandev clean --safe-days 14     # Items unused 14+ days = safe
+cleandev clean --force            # Even protected folders become selectable
 ```
 
 ## Options
@@ -106,7 +106,7 @@ devclean clean --force            # Even protected folders become selectable
 
 ## Smart Recommendations
 
-devclean analyzes each folder and recommends:
+cleandev analyzes each folder and recommends:
 
 - **✅ SAFE** — Not modified in 30+ days. Pre-selected for deletion.
 - **⚠️ REVIEW** — Modified recently. Shown but not pre-selected.
@@ -114,7 +114,7 @@ devclean analyzes each folder and recommends:
 
 ## Monorepo Support
 
-devclean automatically detects:
+cleandev automatically detects:
 - **npm/yarn** workspaces
 - **pnpm** workspaces
 - **Turborepo** projects
@@ -124,7 +124,7 @@ Shared root-level `node_modules` in monorepos are protected from deletion.
 
 ## Config File
 
-Create `devclean.config.js` in your project root:
+Create `cleandev.config.js` in your project root:
 
 ```js
 export default {
@@ -141,7 +141,7 @@ CLI flags override config file values.
 ## Example Output
 
 ```
-  🧹 devclean — reclaim your disk space
+  🧹 cleandev — reclaim your disk space
   ══════════════════════════════════════════
 
   Found 8 cleanable folders
@@ -171,7 +171,7 @@ CLI flags override config file values.
 ## Programmatic API
 
 ```js
-import { scan, enrichResults, cleanAll } from 'devclean';
+import { scan, enrichResults, cleanAll } from 'cleandev';
 
 // Scan
 const results = await scan({ path: '/projects', depth: 5 });

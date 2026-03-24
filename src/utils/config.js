@@ -2,12 +2,12 @@ import { access, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 
 /**
- * Load devclean.config.js if it exists.
+ * Load cleandev.config.js if it exists.
  * @param {string} cwd - Working directory
  * @returns {Promise<object>} Config object
  */
 export async function loadConfig(cwd = process.cwd()) {
-  const configPath = resolve(cwd, 'devclean.config.js');
+  const configPath = resolve(cwd, 'cleandev.config.js');
 
   try {
     await access(configPath);

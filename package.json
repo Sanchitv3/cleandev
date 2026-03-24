@@ -1,10 +1,10 @@
 {
-  "name": "@sanchit.kumar/devclean",
+  "name": "cleandev",
   "version": "1.0.0",
   "description": "Next-gen disk cleanup tool for developers — reclaim tens of GBs by intelligently cleaning node_modules, .next, .expo, build artifacts and more.",
   "type": "module",
   "bin": {
-    "devclean": "./bin/devclean.js"
+    "cleandev": "./bin/cleandev.js"
   },
   "main": "./src/index.js",
   "exports": {
@@ -19,11 +19,11 @@
     "README.md"
   ],
   "scripts": {
-    "start": "node bin/devclean.js",
+    "start": "node bin/cleandev.js",
     "test": "node --test src/**/*.test.js"
   },
   "keywords": [
-    "devclean",
+    "cleandev",
     "disk cleanup",
     "node_modules",
     "cleanup",
@@ -50,7 +50,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Sanchitv3/devclean.git"
+    "url": "git+https://github.com/Sanchitv3/cleandev.git"
   },
   "author": "Sanchit Kumar",
   "funding": {

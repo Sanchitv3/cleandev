@@ -100,11 +100,11 @@ function stripAnsi(str) {
 }
 
 /**
- * Print the devclean banner.
+ * Print the cleandev banner.
  */
 export function printBanner() {
   const lines = [
-    chalk.bold.cyan('🧹 devclean') +
+    chalk.bold.cyan('🧹 cleandev') +
       chalk.dim('  —  ') +
       chalk.white('next-gen disk cleanup for developers'),
     '',

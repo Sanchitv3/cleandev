@@ -22,7 +22,7 @@ function parseList(value) {
 const program = new Command();
 
 program
-  .name('devclean')
+  .name('cleandev')
   .description('Next-gen disk cleanup tool for developers')
   .version(pkg.version);
 

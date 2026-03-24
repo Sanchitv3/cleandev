@@ -1,5 +1,5 @@
 /**
- * Folder types that devclean can detect and clean.
+ * Folder types that cleandev can detect and clean.
  * Each pattern maps to metadata about the folder type.
  */
 export const FOLDER_TYPES = [
