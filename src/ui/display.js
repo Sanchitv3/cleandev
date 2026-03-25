@@ -112,7 +112,7 @@ export function printBanner() {
   ];
 
   console.log();
-  console.log(box(lines, { title: '🧹 DEVCLEAN', titleColor: chalk.bold.cyan, borderColor: chalk.cyan }));
+  console.log(box(lines, { title: '🧹 CLEANDEV', titleColor: chalk.bold.cyan, borderColor: chalk.cyan }));
   console.log();
 }
 
