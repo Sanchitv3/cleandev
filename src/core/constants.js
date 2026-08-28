@@ -108,6 +108,13 @@ export const FOLDER_TYPES = [
     icon: '🚀',
     category: 'build-output',
   },
+  {
+    name: '.dart_tool',
+    patterns: ['.dart_tool', '**/.dart_tool'],
+    description: 'Dart/Flutter tool cache',
+    icon: '🎯',
+    category: 'build-cache',
+  },
 ];
 
 /**
