@@ -52,7 +52,7 @@ function box(lines, opts = {}) {
     title ? stripAnsi(title).length + 2 : 0
   );
   const innerWidth = forcedWidth ? forcedWidth - 4 : maxContentLen + padding * 2;
-  const totalWidth = innerWidth + 2;
+  const totalWidth = innerWidth;
 
   const b = borderColor;
   const result = [];
